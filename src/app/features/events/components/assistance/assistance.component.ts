@@ -96,7 +96,7 @@ export class AssistanceComponent {
       { register_type: 'Pastor' },
       { register_type: 'Ministro' },
       { register_type: 'Anciano' },
-      { register_type: 'Supervisor' },
+      { register_type: 'Diacono' },
       { register_type: 'Lider' },
       { register_type: 'Discipulo' },
       { register_type: 'Miembro' },

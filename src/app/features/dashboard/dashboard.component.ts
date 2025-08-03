@@ -23,7 +23,7 @@ export class DashboardComponent {
   trafficItems = [
     { label: 'Ministros', count: 0, icon: 'pi pi-users' },
     { label: 'Ancianos', count: 0, icon: 'pi pi-users' },
-    { label: 'Supervisores', count: 0, icon: 'pi pi-users' },
+    { label: 'Diaconos', count: 0, icon: 'pi pi-users' },
     { label: 'Lideres', count: 0, icon: 'pi pi-users' },
     { label: 'Discipulos', count: 0, icon: 'pi pi-users' },
     { label: 'Miembros', count: 0, icon: 'pi pi-users' },
@@ -73,7 +73,7 @@ export class DashboardComponent {
                 'Discipulos': 'Discipulo',
                 'Lideres': 'Lider',
                 'Empresarios': 'Empresario',
-                'Supervisores': 'Supervisor',
+                'Diaconos': 'Diacono',
                 'Redes': 'Red',
               };
 
@@ -89,7 +89,7 @@ export class DashboardComponent {
                           Discipulo: countPersonType.Discipulo || 0,
                           Miembro: countPersonType.Miembro || 0,
                           Lider: countPersonType.Lider || 0,
-                          Supervisor: countPersonType.Supervisor || 0,
+                          Diacono: countPersonType.Diacono || 0,
                         }
                   };
             },

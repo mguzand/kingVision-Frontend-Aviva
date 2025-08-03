@@ -29,7 +29,7 @@ export class PersonTypeDropdownFormFieldComponent {
       { estado_civil: 'Miembro' },
       { estado_civil: 'Discipulo' },
       { estado_civil: 'Lider' },
-      { estado_civil: 'Supervisor' },
+      { estado_civil: 'Diacono' },
       { estado_civil: 'Ministro' },
       { estado_civil: 'Anciano' },
       { estado_civil: 'Pastor' },
