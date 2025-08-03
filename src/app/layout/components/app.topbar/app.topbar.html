@@ -1,0 +1,91 @@
+<div class="layout-topbar border-b-1 surface-border border-[#dfe7ef]">
+    <div class="layout-topbar-logo-container">
+        <button class="layout-menu-button layout-topbar-action ml-4" (click)="layoutService.onMenuToggle()">
+            <i class="pi pi-bars"></i>
+        </button>
+        <a class="layout-topbar-logo" routerLink="/">
+            <img style="height: 60px;" height="60px" src="logos/Imagotipomitra_negro.png" alt="">
+            <span>KingVision</span>
+        </a>
+    </div>
+
+    <div class="layout-topbar-actions">
+         
+        <p-button
+        size="large"
+        [text]="true"
+        icon="pi pi-bell"
+        pTooltip="Notificaciones"
+        tooltipPosition="left"
+ 
+      ></p-button> 
+
+      <p-button
+      size="large"
+      [text]="true"
+      styleClass="mr-2"
+      [icon]="isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"
+      [pTooltip]="
+        isFullScreen ? 'Salir pantalla completa' : 'Pantalla completa'
+      "
+      tooltipPosition="left"
+      (onClick)="isFullScreen ? onCloseFullScreen() : onOpenFullScreen()"
+    ></p-button>
+
+    <div
+      class="flex align-items-center border-left-1 surface-border pl-4 cursor-pointer inline-block align-middle"
+      (click)="menu.toggle($event)"
+    >
+
+    <span class="mr-4 font-medium">{{ firstname }} {{surname}}</span>
+    <p-avatar
+        [label]="initialLetter"
+        styleClass="mr-2 cursor-pointer layout-topbar-button"
+        [style]="{
+          'background-color': '#9c27b0',
+          color: '#ffffff',
+          width: '2.5rem',
+          height: '2.5rem'
+        }"
+        shape="circle"
+      ></p-avatar>
+
+
+    </div>
+
+    <p-menu
+      #menu
+      [model]="items"
+      [popup]="true"
+      appendTo="body"
+    >
+    <ng-template #start>
+       <section class="right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl  bg-white p-3 shadow-theme-lg  dark:bg-gray-dark">
+        <div>
+          <span class="block text-theme-sm font-semibold !text-gray-700">
+            {{user.names}} {{user.surname}}
+          </span>
+          <span class="mt-0.5 block text-theme-xs !text-gray-500">
+             {{user.email}}
+          </span>
+        </div>
+       </section>
+    </ng-template>  
+  </p-menu>
+
+
+
+        <!-- <button class="layout-topbar-menu-button layout-topbar-action" pStyleClass="@next" enterFromClass="hidden" enterActiveClass="animate-scalein" leaveToClass="hidden" leaveActiveClass="animate-fadeout" [hideOnOutsideClick]="true">
+            <i class="pi pi-ellipsis-v"></i>
+        </button>
+
+        <div class="layout-topbar-menu hidden lg:block">
+            <div class="layout-topbar-menu-content">
+                <button type="button" class="layout-topbar-action">
+                    <i class="pi pi-user"></i>
+                    <span>Profile</span>
+                </button>
+            </div>
+        </div> -->
+    </div>
+</div>

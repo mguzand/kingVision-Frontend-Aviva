@@ -1,0 +1,72 @@
+ 
+
+<section class="mx-auto max-w-(--breakpoint-2x2) p-4 ">
+   <section class="grid grid-cols-1 gap-12">
+        <section class="space-y-12">
+            <p-card styleClass="animate__animated animate__fadeIn">
+                 <p-table [value]="data.events"  styleClass="p-datatable-sm" styleClass="p-datatable-gridlines border-round overflow-hidden" showGridlines>
+                      <ng-template pTemplate="caption">
+                        <div class="flex justify-between">
+                            <div class="min-w-[320px] field col-5 md:col-5">
+                                <span class="p-input-icon-left w-full">
+                                    <input
+                                    pInputText
+                                    appDebounce
+                                    type="text"
+                                    class="p-inputtext w-full"
+                                    placeholder="Buscar..."
+                                    
+                                     
+                                    />
+                                </span>
+                            </div>
+                            <button
+                                 
+                                class="cursor-pointer text-MAIN_WHITE text-[18px] font-semibold bg-PRIMARY_COLOR flex items-center flex-row rounded-lg justify-center gap-2"
+                                style="padding: 10px"
+                            >
+                        <span class="text-white-300 !font-semibold">Nuevo Evento</span>
+                                <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 17 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-[20px] h-[20px]"
+                                >
+                                <path
+                                    _ngcontent-ng-c3051437113=""
+                                    d="M0.577969 11.27V7.28H16.433V11.27H0.577969ZM6.49297 0.945H10.553V17.57H6.49297V0.945Z"
+                                    fill="currentColor"
+                                ></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                        <th>Nombre evento</th>
+                        <th>Tipo de evento</th>
+                        <th>Fecha evento</th>
+                        <th>Opciones</th>
+                        </tr>
+                    </ng-template>
+                     <ng-template pTemplate="body" let-dataevent>
+                        <tr>
+                        <td>{{ dataevent.name }}</td>
+                        <td>Discipulados</td>
+                        <td>{{ dataevent.date | date : "dd/MM/yyyy" }}</td>
+                        <td style="width:120px" class="text-center">
+                            <p-button   class="mr-2 w-2" icon="pi pi-pencil" severity="info" pTooltip="Editar registro" tooltipPosition="left" />
+                            
+                            <p-button  [routerLink]="['/event','assistance',dataevent.id ]"  class="w-2" icon="pi pi-arrow-right" severity="info" pTooltip="Detalle del evento" tooltipPosition="left" />
+                        </td>
+                        </tr>
+
+                     </ng-template>
+
+                 </p-table>
+            </p-card>
+        </section>
+   </section>
+</section>

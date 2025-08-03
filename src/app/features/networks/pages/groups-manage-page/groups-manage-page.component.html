@@ -1,0 +1,18 @@
+<div class="p-4">
+    <app-section-header
+    titleheader="Casas de reino de la red {{ redName}}"
+    description="En esta sección, podrás gestionar las casas de reino asociadas a cada red. Cada casa de reino está vinculada a una red específica y, a su vez, agrupa a las personas que forman parte de ella. Tendrás la capacidad de crear, editar y visualizar casas de reino, así como administrar a las personas que pertenecen a cada una. Además, contarás con herramientas prácticas para filtrar y buscar casas de reino o personas, lo que facilitará el seguimiento y la organización estructural dentro del sistema."  
+    image="--"
+    ></app-section-header>
+</div>
+
+<section class="mx-auto max-w-(--breakpoint-2x2) p-4 ">
+    <section class="grid grid-cols-1 gap-12">
+         <section class="space-y-12">
+             
+             <p-card styleClass="animate__animated animate__fadeIn">
+                 <app-groups-manage-table [network_id]="network_id"  />
+             </p-card>
+         </section>
+    </section>
+ </section>

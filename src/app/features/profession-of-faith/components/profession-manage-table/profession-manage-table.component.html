@@ -1,0 +1,133 @@
+ 
+<p-table [value]="data.proffesion"  styleClass="p-datatable-sm" styleClass="p-datatable-gridlines border-round overflow-hidden" showGridlines>
+    <ng-template pTemplate="caption">
+        <div class="flex justify-between">
+             <div class="flex w-full"> 
+                <!-- <p-dropdown
+                styleClass="w-[350px] py-3 px-5 "
+                placeholder="Tipo de Reunión"
+                appendTo="body"
+                inputId="register_type"
+                id="register_type"
+                [options]="dataMeetings"
+                optionLabel="name_meeting"
+                optionValue="id"
+                [filter]="true" 
+                [(ngModel)]="paginationParams.network_type"
+                (onChange)="onSearch()"
+              ></p-dropdown> -->
+
+              <section class="pl-4 flex w-[350px] flex-col overflow-hidden rounded-2xl lg:col-span-4 md:col-span-6 ">
+                <section   class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                    <p-datepicker dateFormat="dd/mm/yy"  (onSelect)="onSearch()" [(ngModel)]="paginationParams.search"  placeholder="20/10/2024" [appendTo]="'body'"   class="MainInput w-full placeholder:text-GRAY_2 placeholder:font-medium placeholder:text-[15px] dk:placeholder:text-[18px] text-[18px]" />
+                </section>
+              </section>
+           </div>
+            <!-- <div class="min-w-[320px] field col-5 md:col-5">
+                <span class="p-input-icon-left w-full">
+                    
+                    <p-datepicker  placeholder="20/10/2024" [appendTo]="'body'"   class="MainInput w-full placeholder:text-GRAY_2 placeholder:font-medium placeholder:text-[15px] dk:placeholder:text-[18px] text-[18px]" />
+                </span>
+            </div> -->
+             <button
+                (click)="howOpenPdf(4)"
+                class="mr-5 w-[400px] cursor-pointer text-MAIN_WHITE text-[18px] font-semibold bg-PRIMARY_COLOR flex items-center flex-row rounded-lg justify-center gap-2"
+                style="padding: 10px"
+                >
+                <span class="text-white-300 !font-semibold">Imprimir reporte para lideres</span> 
+            </button>
+
+            <button
+                (click)="howOpenPdf(3)"
+                class="w-[300px] cursor-pointer text-MAIN_WHITE text-[18px] font-semibold bg-PRIMARY_COLOR flex items-center flex-row rounded-lg justify-center gap-2"
+                style="padding: 10px"
+                >
+                <span class="text-white-300 !font-semibold">Imprimir reporte</span> 
+            </button>
+
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+          <th>No</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Edad</th>
+          <th>Celular</th>
+          <th>Fecha conversión</th>
+           <th>Tipo conversión</th>
+           <th>Estado</th>
+           <th>Opciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dataProffesion let-rowIndex="rowIndex" >
+        <tr>
+            <td>{{ rowIndex+1 }}</td>
+            <td>
+                <div class="flex items-center gap-2"  (click)="mostrarPreview(dataProffesion.person.identity)" >
+                    @if (dataProffesion.person.identity) {
+                        <p-avatar *ngIf="!avatarLoadError[dataProffesion.person.identity]" [image]="`${url_server}/person/files/${dataProffesion.person.identity}`" (onImageError)="avatarLoadError[dataProffesion.person.identity] = true"  shape="circle" size="large" />
+                    }
+                    <span>{{ dataProffesion.person.names | uppercase }}</span>
+                </div> 
+            </td>
+            <td>{{ dataProffesion.person.surname | uppercase }}</td>
+            <td class="text-center">{{ dataProffesion.person.birth_date | age }}</td>
+             <td>{{ dataProffesion.person.phone }}</td>
+             <td>{{ dataProffesion.date_conversion | date : "dd/MM/yyyy" }}</td>
+             <td>
+                {{
+                dataProffesion.tipo_conversion === 1
+                    ? "Acepto por primera vez"
+                    : "Reconcilio con Jesús"
+                }}
+             </td>
+             <td> 
+                <p-tag 
+                [value]="dataProffesion.person.group_id ? 'Asignado' : 'Sin Asignar' " 
+                [severity]="dataProffesion.person.group_id ? 'success' : 'warn' "
+                 />
+             </td>
+             <td>
+                <div class="text-center">
+                <p-menu
+                    #menu
+                    [model]="menuItems[dataProffesion.people_id]"
+                    appendTo="body"
+                    [popup]="true"
+                ></p-menu>
+                <button
+                    pButton
+                    type="button"
+                    (click)="menu.toggle($event)"
+                    icon="pi pi-ellipsis-v"
+                    class="p-button-text"
+                ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+@if (data.proffesion.length === 0 && paginationParams.search) {
+    <section class="section-none mt-4">
+        <div >No se encontraron registros</div>
+    </section>
+}
+
+@if (!paginationParams.search) {
+    <section class="section-none mt-4">
+        <div >Seleccione una fecha para mostrar</div>
+    </section>
+}
+
+
+<div class="col-12">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [totalRecords]="pagination.totalItems"
+      [rows]="paginationParams.itemsPerPage || 10"
+      [rowsPerPageOptions]="[5, 10, 20, 30,100]"
+    ></p-paginator>
+</div>

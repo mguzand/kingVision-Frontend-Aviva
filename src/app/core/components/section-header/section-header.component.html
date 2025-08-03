@@ -1,0 +1,38 @@
+<div
+  class="w-full border-top-3 border-primary mb-4 md:mb-6 border-round overflow-hidden surface-50 animate__animated animate__fadeIn"
+>
+<section class="flex flex-col gap-4">
+  <section class="flex w-full min-[920px]:flex-row flex-col items-start min-[920px]:items-center gap-4">
+     <div class="flex items-center gap-1 dk:gap-2">
+      <section class="mr-3" [innerHTML]="{ svg: 'list', text: '',  class: 'PRIMARY_COLOR', ruta: 'svg', w: 10 } | svgIcon | async"></section> 
+      <h3 class="m-0 mr-4 shrink-0 flex-1 text-[10px] dk:text-[31px] text-GRAY_2 whitespace-pre-line w-full">{{ titleheader }}</h3>
+     </div>
+     <div class="w-full h-[2px] bg-PRIMARY_COLOR flex flex-1"></div>
+  </section>
+  <section class="flex flex-col min-[920px]:flex-row items-start gap-8 ">
+    <p class="text-[16px] leading-[150%] text-GRAY_3 whitespace-pre-line">
+      {{ description }}
+    </p>
+  </section>
+</section>
+  <!-- <div class="grid p-2 md:p-4">
+    <div class="col-12 md:col-6 xl:col-8">
+      <div class="w-full">
+        <p class="text-3xl font-medium text-800">{{ titleheader }}</p>
+        <p class="text-600 m-0">
+          {{ description }}
+        </p>
+      </div>
+    </div>
+    <div
+      class="col-12 md:col-6 xl:col-4 flex justify-content-center md:justify-content-end"
+    >
+      <img
+        [src]="image"
+        alt="ICONO"
+        width="128px"
+        style="object-fit: contain"
+      />
+    </div>
+  </div> -->
+</div>

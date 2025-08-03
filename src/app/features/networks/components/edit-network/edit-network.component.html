@@ -1,0 +1,69 @@
+<form class="w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <section class="mt-3 flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-4 md:col-span-6 ">
+        <section class="min-h-[20px] pb-2 ml-4">
+            <p class="font-bold">Numero de red</p>
+          </section>
+        <section [ngClass]="{ 'ng-error-input': isNotValiNnumero_Network }"  class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+ 
+
+            <p-inputMask
+                mask="99"
+                placeholder="Ej: 3"
+                styleClass="w-full"
+                inputId="number"
+                autocomplete="off"
+                [autoClear]="false"
+                slotChar=""
+                formControlName="number"
+                class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" 
+                type="text"
+                name="number" id="number" 
+              /> 
+
+
+        </section>
+        @if(isNotValiNnumero_Network){
+            <small class="text-red-500 animate__animated animate__fadeIn mt-1"
+              >* Se debe especificar el numero de red.
+            </small>
+        }
+    </section>
+
+    <section class="mt-3 flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-4 md:col-span-6 ">
+        <section class="min-h-[20px] pb-2 ml-4">
+            <p class="font-bold">Nombre de red</p>
+          </section>
+        <section   [ngClass]="{ 'ng-error-input': isNotValidName }"  class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+            <input  pInputText formControlName="name" placeholder="Ej: Red 3" autocomplete="off" class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" type="text" name="nombres" id="nombres">
+        </section>
+        @if(isNotValidName){
+            <small class="text-red-500 animate__animated animate__fadeIn mt-1"
+              >* Se debe especificar el nombre de la red.
+            </small>
+        }
+    </section>
+
+
+ 
+
+
+    
+    <section class="mt-4 ml-2 flex flex-row flex-nowrap justify-between items-center">
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full bg-SECONDARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+        >
+          Cancelar
+        </button>
+    
+        <button
+          type="submit"
+          [disabled]="form.invalid"
+          class="cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full bg-PRIMARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+        >
+          Actualizar
+        </button>
+    </section>
+</form>

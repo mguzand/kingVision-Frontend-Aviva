@@ -1,0 +1,85 @@
+<p-confirmDialog key="confirmDeleteDialog"></p-confirmDialog>
+
+<p-table [value]="data.affirmation"  styleClass="p-datatable-sm" styleClass="p-datatable-gridlines border-round overflow-hidden" showGridlines>
+    <ng-template pTemplate="caption">
+        <div class="flex justify-between">
+            <div class="min-w-[320px] field col-5 md:col-5">
+                <span class="p-input-icon-left w-full">
+                    <input
+                    pInputText
+                    appDebounce
+                    type="text"
+                    class="p-inputtext w-full"
+                    placeholder="Buscar..."
+                    
+                    (input)="onSearch()"
+                    />
+                </span>
+            </div>
+            <button
+                (click)="openAddHealth()"
+                class="cursor-pointer text-MAIN_WHITE text-[18px] font-semibold bg-PRIMARY_COLOR flex items-center flex-row rounded-lg justify-center gap-2"
+                style="padding: 10px"
+            >
+           <span class="text-white-300 !font-semibold">Nuevo registro</span>
+                <svg
+                width="20"
+                height="20"
+                viewBox="0 0 17 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-[20px] h-[20px]"
+                >
+                <path
+                    _ngcontent-ng-c3051437113=""
+                    d="M0.577969 11.27V7.28H16.433V11.27H0.577969ZM6.49297 0.945H10.553V17.57H6.49297V0.945Z"
+                    fill="currentColor"
+                ></path>
+                </svg>
+            </button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+          <th>No</th>
+          <th>Nombre del evento</th>
+          <th>Fecha del retiro</th>
+          <th style="width: 100px">Valor</th>
+          <th style="width: 0px">Participantes</th>
+          <th style="width: 0px">Asistencia</th>
+          <th>Fecha creación</th>
+          <th>Opciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dataAffirmation let-rowIndex="rowIndex" >
+        <tr>
+            <td>{{ rowIndex+1 }}</td>
+            <td>{{ dataAffirmation.name }}</td>
+            <td>{{ dataAffirmation.date | date : "dd/MM/yyyy h:mm a" }}</td>
+            <td>L. {{ dataAffirmation.amount }}</td>
+            <td class="text-center" >{{ dataAffirmation.total_list }}</td>
+            <td class="text-center" >{{ dataAffirmation.total_attended }}</td>
+            <td>{{ dataAffirmation.creation_date | date : "dd/MM/yyyy" }}</td>
+            <td style="width:120px" class="text-center">
+                <p-button  (onClick)="onDeleteActivity(dataAffirmation)"  [disabled]="dataAffirmation.total_attended > 0" class="mr-2 w-2" icon="pi pi-trash" severity="danger" pTooltip="Eliminar registro" tooltipPosition="left" />
+                <p-button  [routerLink]="['/affirmation','interior-health','details-list',dataAffirmation.id]"  class="w-2" icon="pi pi-arrow-right" severity="info" pTooltip="listado de participante" tooltipPosition="left" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+@if (data.affirmation.length === 0) {
+    <section class="section-none mt-4">
+        <div >No se encontraron registros</div>
+    </section>
+}
+
+
+<div class="col-12">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [totalRecords]="pagination.totalItems"
+      [rows]="paginationParams.itemsPerPage || 10"
+      [rowsPerPageOptions]="[5, 10, 20, 30,100]"
+    ></p-paginator>
+  </div>

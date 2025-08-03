@@ -1,0 +1,59 @@
+<p-table
+    [value]="data.person"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [rowHover]="true" 
+    styleClass="p-datatable-sm" styleClass="p-datatable-gridlines border-round overflow-hidden" showGridlines
+>
+
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Personas de casa de reino</h5>
+            
+        </div>
+    </ng-template>
+
+    <ng-template #header>
+        <tr> 
+            <th>Identidad</th>
+            <th>Nombres Completo</th> 
+            <th>Genero</th>
+            <th>Estado Civil</th>
+            <th>Visión</th>
+            <th>Edad</th>
+            <th>Celular</th>
+            <th>Anfitrión</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataPerson>
+        <tr> 
+            <td>{{ dataPerson.identity }}</td>
+            <td>
+                <div class="flex items-center gap-2"  (click)="mostrarPreview(dataPerson.identity)" >
+                    <p-avatar *ngIf="!avatarLoadError[dataPerson.identity]" [image]="`${url_server}/person/files/${dataPerson.identity}`" (onImageError)="avatarLoadError[dataPerson.identity] = true"  shape="circle" size="large" />
+                    <span>{{ dataPerson?.names }} {{ dataPerson?.surname }}</span>
+                  </div>
+      
+                  <p-image
+                    #imgPreview
+                    [src]="`${url_server}/person/files/${dataPerson.identity}`"
+                    [alt]="dataPerson.names"
+                    [preview]="true"
+                    class="sr-onlys"
+                    width="0"
+                    [attr.data-identity]="dataPerson.identity">
+                  </p-image>
+
+               </td> 
+            <td>{{ dataPerson.gender }}</td>
+            <td>{{ dataPerson.marital_status }}</td>
+            <td>
+                <p-tag [value]="dataPerson.person_type" severity="warn" />
+            </td>
+            <td class="text-center">{{ dataPerson.birth_date | age }}</td>
+            <td>{{ dataPerson.phone }}</td>
+            <td>
+                <p-toggleswitch [(ngModel)]="dataPerson.is_host"  (onChange)="ManageHost(dataPerson.is_host, dataPerson.id)" />
+            </td>
+        </tr>
+    </ng-template>

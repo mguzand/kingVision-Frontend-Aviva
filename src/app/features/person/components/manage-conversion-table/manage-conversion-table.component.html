@@ -1,0 +1,62 @@
+<p-confirmDialog key="confirmDeleteDialog"></p-confirmDialog>
+<p-table
+  [loading]="isLoading"
+  showGridlines
+  [value]="conversion"
+  styleClass="p-datatable-gridlines border-round overflow-hidden"
+>
+<ng-template pTemplate="caption"> Historial de conversiones </ng-template>
+<ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>Fecha de conversi&oacute;n</th>
+      <th>Tipo conversi&oacute;n</th>
+      <th>Tipo reuni&oacute;n</th>
+      <th>Opciones</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-convers>
+    <tr>
+      <td>{{ convers.id }}</td>
+      <td>{{ convers.date_conversion | date : "dd/MM/yyyy" }}</td>
+      <td>
+        {{
+          convers.tipo_conversion === 1
+            ? "Acepto por primera vez"
+            : "Reconcilio con Jesús"
+        }}
+      </td>
+
+      <td>
+        {{ getMeeting(convers.network_type) }}
+      </td>
+      <td>
+        <div class="text-center">
+          <p-menu
+            #menu
+            [model]="menuItems[convers.id]"
+            appendTo="body"
+            [popup]="true"
+          ></p-menu>
+          <button
+            pButton
+            type="button"
+            (click)="menu.toggle($event)"
+            icon="pi pi-ellipsis-v"
+            class="p-button-text"
+          ></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+
+  
+  
+  
+</p-table>
+
+@if(!conversion){
+<div class="mt-4">
+    <p-message styleClass="h-[40px] " severity="warn">No se encontraron registro</p-message>
+</div>
+}

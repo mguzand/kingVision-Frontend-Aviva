@@ -1,0 +1,116 @@
+<p-confirmDialog key="confirmDeleteDialog"></p-confirmDialog>
+
+<p-table [value]="data.groups"  styleClass="p-datatable-sm" styleClass="p-datatable-gridlines border-round overflow-hidden" showGridlines>
+    <ng-template pTemplate="caption">
+        <div class="flex justify-between">
+            <div class="min-w-[320px] field col-5 md:col-5">
+                <span class="p-input-icon-left w-full">
+                    <input
+                    pInputText
+                    appDebounce
+                    type="text"
+                    class="p-inputtext w-full"
+                    placeholder="Buscar casa de reino"
+                    
+                    (input)="onSearch()"
+                    />
+                </span>
+            </div>
+            <button
+                 (click)="openAddGroups()"
+                class="cursor-pointer text-MAIN_WHITE text-[18px] font-semibold bg-PRIMARY_COLOR flex items-center flex-row rounded-lg justify-center gap-2"
+                style="padding: 12px 30px;border-radius: 20px;font-size: 16px;"
+            >
+           <span class="text-white-300 !font-semibold">Nueva casa de reino</span>
+                <svg
+                width="20"
+                height="20"
+                viewBox="0 0 17 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-[20px] h-[20px]"
+                >
+                <path
+                    _ngcontent-ng-c3051437113=""
+                    d="M0.577969 11.27V7.28H16.433V11.27H0.577969ZM6.49297 0.945H10.553V17.57H6.49297V0.945Z"
+                    fill="currentColor"
+                ></path>
+                </svg>
+            </button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+          <th>No</th>
+          <th>Nombre casa de reino</th>
+          <th>Direcci&oacute;n</th>
+          <th>Lider de casa de reino</th>
+          <th>Fecha Creaci&oacute;n</th>
+          <th>Estado</th>
+          <th>Opci&oacute;n</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-groups let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ rowIndex+1 }}</td>
+          <td>{{ groups.name }}</td>
+          <td [innerHTML]="groups.address"> </td>
+          <td>
+            @if (groups.leadersGroup) {
+              <section class="">
+                @for (item of groups.leadersGroup; track $index) {
+                  <p class="flex flex-row flex-wrap gap-2">
+                    <span>
+                      <div class="flex items-center bg-gray-100 text-gray-800 rounded-full px-4 py-1 text-sm font-medium shadow-md">
+                        <i class="pi pi-user mr-2 text-gray-500"></i>
+                        {{ item.person.names }} {{ item.person.surname }}
+                        <button
+                           (click)="onRemoveChip(item.people_id, item.group_id)"
+                          class="cursor-pointer ml-2 text-gray-500 hover:text-red-600 focus:outline-none"
+                          
+                        >
+                          <i class="pi pi-times text-xs"></i>
+                        </button>
+                      </div>
+                    </span>
+                  </p>
+                }
+              </section>
+            }
+          </td>
+          <td>{{ groups.creation_date | date : "dd/MM/yyyy" }}</td>
+          <td>
+            <p-tag [severity]="getSeverity(groups.status)" [value]="getEstadoValue(groups.status)" />
+          </td>
+          <td style="width:120px" class="text-center">
+             
+              <div class="text-center w-full">
+                <p-menu
+                  #menu
+                  [model]="menuItems[groups.id]"
+                  [popup]="true"
+                  appendTo="body"
+                ></p-menu>
+                <button
+                  pButton
+                  (click)="menu.toggle($event)"
+                  class="p-button-text"
+                  icon="pi pi-ellipsis-v"
+                ></button>
+              </div>
+            
+
+            <!-- <p-button (onClick)="editRegister(groups)" class="mr-2 w-2" icon="pi pi-pencil" severity="info" pTooltip="Editar registro" tooltipPosition="left" />
+            <p-button (onClick)="onDeleteActivity(groups.id)" class="w-2" icon="pi pi-times" severity="info" pTooltip="Dar de baja" tooltipPosition="left" /> -->
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div class="col-12">
+        <p-paginator
+          (onPageChange)="onPageChange($event)"
+          [totalRecords]="pagination.totalItems"
+          [rows]="paginationParams.itemsPerPage || 10"
+          [rowsPerPageOptions]="[5, 10, 20, 30,100]"
+        ></p-paginator>
+      </div>

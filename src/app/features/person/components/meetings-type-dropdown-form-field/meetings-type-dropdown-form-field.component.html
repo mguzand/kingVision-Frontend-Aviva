@@ -1,0 +1,25 @@
+<section class="min-h-[20px] pb-2 ml-4">
+    <p class="font-bold">{{ label }}</p>
+  </section>
+  
+  
+  
+  <p-dropdown
+    styleClass="w-full py-3 px-5 "
+    [placeholder]="placeholder"
+    appendTo="body"
+    [inputId]="inputId"
+    [id]="inputId"
+    [ngClass]="{ 'ng-error ng-dirty': isRequired }"
+    [options]="dataMeetings"
+    optionLabel="name_meeting"
+    optionValue="id"
+    [filter]="true"
+    [formControl]="control"
+  ></p-dropdown>
+  @if (isRequired) {
+  <small class="text-red-500 animate__animated animate__fadeIn"
+    >* Este campo es obligatorio.</small
+  >
+  }
+  

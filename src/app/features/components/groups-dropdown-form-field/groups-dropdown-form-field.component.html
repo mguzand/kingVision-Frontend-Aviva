@@ -1,0 +1,19 @@
+<section class="min-h-[20px] pb-2 ml-4">
+    <p class="font-bold">{{ label }}</p>
+  </section>
+ 
+
+<p-dropdown
+  styleClass="w-full py-3 px-5"
+  [placeholder]="placeholder"
+  appendTo="body"
+  [inputId]="inputId"
+  [id]="inputId"
+  [options]="groups"
+  optionLabel="label"
+  optionValue="id"
+  [filter]="true"
+  [formControl]="control"
+></p-dropdown>
+
+

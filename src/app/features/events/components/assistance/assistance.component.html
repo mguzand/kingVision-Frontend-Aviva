@@ -1,0 +1,93 @@
+
+
+<p-table [value]="data.person"  styleClass="p-datatable-sm" styleClass="p-datatable-gridlines border-round overflow-hidden" showGridlines>
+    <ng-template pTemplate="caption">
+        <div class="flex justify-between">
+           <div> 
+                <p-dropdown
+                styleClass="w-[300px] py-3 px-5 "
+                placeholder="Tipo de registro"
+                appendTo="body"
+                inputId="register_type"
+                id="register_type"
+                [options]="person_type"
+                optionLabel="register_type"
+                optionValue="register_type"
+                [filter]="true" 
+                [(ngModel)]="paginationParams.person_type"
+                (onChange)="onSearch()"
+              ></p-dropdown>
+           </div>
+          <div class="min-w-[320px] field col-5 md:col-5">
+            <span class="p-input-icon-left w-full">
+              <input
+                pInputText
+                appDebounce
+                type="text"
+                class="p-inputtext w-full"
+                placeholder="Buscar identidad o Nombre"
+                [(ngModel)]="paginationParams.search"
+                (input)="onSearch()"
+              />
+            </span>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #header>
+        <tr>
+            <th>No</th>
+            <th>Identidad</th>
+            <th>Nombre Completo</th>
+            <th>Genero</th>
+            <th>Telefono</th>
+            <th>Estado Civil</th>
+            <th>Edad</th>
+            <th>Tipo registro</th>
+            <th>Asistencia</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-dataPerson let-index="rowIndex">
+        <tr>
+          <td>{{ ((pagination.currentPage - 1) * pagination.itemsPerPage) + index + 1 }}</td>
+          <td>{{ dataPerson.identity }}</td>
+          <td>
+            <div class="flex items-center gap-2"   >
+              <p-avatar *ngIf="!avatarLoadError[dataPerson.identity]" [image]="`${url_server}/person/files/${dataPerson.identity}`" (onImageError)="avatarLoadError[dataPerson.identity] = true"  shape="circle" size="large" />
+              <span>{{ dataPerson?.names }} {{ dataPerson?.surname }}</span>
+            </div>
+
+             
+             
+             
+          </td>
+          <td>{{ dataPerson.gender }}</td>
+          <td>{{ dataPerson.phone }}</td>
+          <td>{{ dataPerson.marital_status }}</td>
+          <td class="text-center">{{ dataPerson.birth_date | age }}</td>
+          <td class="text-center">
+            <p-tag [value]="dataPerson.person_type" severity="warn" />
+          </td>
+          <td>
+            <div class="text-center w-full"> 
+               <p-inputSwitch
+                  (onChange)="onStatusChange(dataPerson)"
+                   [(ngModel)]="dataPerson.status"
+                [style]="{ width: '80px', height: '40px' }"
+              ></p-inputSwitch>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+
+
+</p-table>
+
+<div class="col-12">
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [totalRecords]="pagination.totalItems"
+    [rows]="paginationParams.itemsPerPage || 10"
+    [rowsPerPageOptions]="[5, 10, 20, 30,100]"
+  ></p-paginator>
+</div>

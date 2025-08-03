@@ -1,0 +1,43 @@
+<p-card styleClass="animate__animated animate__fadeIn">
+    <fieldset class="mt-4 flex flex-col justify-center items-center w-full gap-4 my-4">
+        
+        <div class="w-full grid grid-cols-5 grid-rows-2 gap-3">
+            @if (personId) {
+                <div class="col-span-5">
+                  <app-create-conversion-form [personId]="personId" />
+                </div>
+                <div class="col-span-5 row-start-2">
+                  <app-manage-conversion-table [personId]="personId" />
+                </div>
+            }
+        </div>
+
+        <section class="w-full flex flex-col lg:grid lg:grid-cols-6  gap-4 items-stretch justify-stretch justify-items-stretch">
+            <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3">
+             <!-- <button
+               
+                type="button" 
+                (click)="onBack()"
+                class="cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full max-w-[320px] bg-SECONDARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+              >
+              <section class="mr-5" [innerHTML]="{ svg: 'back', text: '',  class:  'MAIN_WHITE', ruta: 'svg' } | svgIcon | async"></section> 
+              Anterior
+              </button> -->
+
+            </section>
+            <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 items-end">
+              <button
+               
+                type="button" 
+                
+                class="cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full max-w-[320px] bg-SECONDARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+              >
+                Siguiente
+                <section class="ml-5" [innerHTML]="{ svg: 'nex', text: '',  class:  'MAIN_WHITE', ruta: 'svg' } | svgIcon | async"></section> 
+              </button>
+            </section>
+          </section>
+
+
+    </fieldset>
+</p-card>

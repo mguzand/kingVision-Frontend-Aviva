@@ -1,0 +1,35 @@
+.conversation-header {
+    padding: 10px 4px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+}
+
+.chat-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px;
+    background-color: #dce6f1;
+    overflow: hidden;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.conversation-info {
+    margin-left: 12px;
+}
+
+.conversation-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000e6;
+}
+
+.conversation-status {
+    font-size: 13px;
+    color: #666;
+}

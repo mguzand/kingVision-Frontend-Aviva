@@ -1,0 +1,19 @@
+<div class="p-4">
+    <app-section-header
+    titleheader="Participantes del evento"
+    description="En esta sección podrás gestionar el listado de participantes que asisten al retiro de sanidad interior. Tendrás la opción de agregar nuevos integrantes al evento, visualizar la información registrada y eliminar participantes cuando sea necesario. Este módulo facilita el seguimiento personalizado desde el inicio del proceso de afirmación, garantizando una atención cálida y ordenada para cada persona que inicia su camino espiritual."  
+    image="--"
+    />
+</div>
+
+
+
+<section class="mx-auto max-w-(--breakpoint-2x2) p-4 ">
+    <section class="grid grid-cols-1 gap-12">
+         <section class="space-y-12">
+             <p-card styleClass="animate__animated animate__fadeIn">
+                <app-list-detail-interior-health-table [affirmation_id]="affirmation_id" />
+             </p-card>
+         </section>
+    </section>
+</section>

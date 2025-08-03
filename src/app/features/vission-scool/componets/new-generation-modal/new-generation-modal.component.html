@@ -1,0 +1,90 @@
+<form class="w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <section class="w-full flex flex-col lg:grid lg:grid-cols-12  gap-4 items-stretch justify-stretch justify-items-stretch">
+            
+            <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-12 md:col-span-12 ">
+                  <section class="min-h-[20px] pb-2 ml-4">
+                      <p class="font-bold">Nombre del evento</p>
+                    </section>
+                  <section  class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                      <input pInputText formControlName="name" placeholder="Ej: Generacion 4" autocomplete="off" class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" type="text" name="apellidos" id="apellidos">
+                  </section>
+            </section>
+
+            <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-12 md:col-span-12 ">
+                <section class="min-h-[20px] pb-2 ml-4">
+                      <p class="font-bold">Encargado de generación</p>
+                </section>
+                 <section    class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                     <p-autoComplete
+                     formControlName="in_charge_id"
+                     [suggestions]="filteredPeople"
+                     (completeMethod)="filterPeople($event)"
+                     [optionLabel]="getFullName"
+                     optionValue="id"
+                     [forceSelection]="true"
+                     [minLength]="3"
+                     [virtualScroll]="true"
+                     [itemSize]="30"
+                     [showClear]="true"
+                     appendTo="body"
+                     class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" 
+                     styleClass="w-full" 
+                     placeholder="Buscar persona">
+     
+                     <ng-template let-person pTemplate="item">
+                         <div class="flex flex-col">
+                           <span class="font-semibold">{{ person.names }} {{ person.surname }}</span>
+                           <small class="text-gray-500">{{ person.identity }} / {{ person.phone }}</small>
+                         </div>
+                     </ng-template>
+     
+                 </p-autoComplete>
+                 </section>
+
+            
+            </section>
+         
+    </section>
+
+    @if(periods.controls.length > 0) { 
+        <div class="mt-5">
+            <p-fieldset legend="Programar fecha de clases" >
+               <section class="w-full flex flex-col lg:grid lg:grid-cols-12  gap-4 items-stretch justify-stretch justify-items-stretch mt-5" formArrayName="periods">
+                    @for (items of dataClass; track items; let i = $index) {
+                        <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-6 md:col-span-6 " [formGroupName]="i">
+                              <section class="min-h-[20px] pb-2 ml-4">
+                                  <p class="font-bold">#{{i+1}} {{ items.name }}</p>
+                              </section>
+                              <section  class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                                  <p-datepicker  placeholder="20/10/2024" [appendTo]="'body'" formControlName="period" class="MainInput w-full placeholder:text-GRAY_2 placeholder:font-medium placeholder:text-[15px] dk:placeholder:text-[18px] text-[18px]" />
+                              </section>
+                        </section>
+                    }
+    
+               </section>
+    
+            </p-fieldset>
+        </div>
+    }
+
+
+    <section class="mt-4 ml-2 flex flex-row flex-nowrap justify-between items-center">
+        <button autofocus
+          type="button"
+          (click)="closeModal()"
+          class="cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full bg-SECONDARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+        >
+          Cancelar
+        </button>
+    
+        <button
+          type="submit"
+          [disabled]="form.invalid"
+          class="cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full bg-PRIMARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+        >
+          Agregar
+        </button>
+    </section>
+
+
+</form>

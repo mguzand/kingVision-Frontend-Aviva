@@ -1,0 +1,16 @@
+:host ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background-color: #10b981 !important; // verde esmeralda
+}
+
+:host ::ng-deep .p-inputswitch .p-inputswitch-slider {
+  background-color: #d1d5db;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #f0fdf4;
+}
+
+
+.p-dialog{
+    width: 50vw !important;
+}

@@ -1,0 +1,420 @@
+<p-card styleClass="animate__animated animate__fadeIn">
+    <form class="w-full"  [formGroup]="createMemberForm" (ngSubmit)="onSubmit()">
+        <section class="relative flex flex-col w-full items-center justify-center">
+          <h2 class="text-2xl font-bold text-SECONDARY_COLOR">Crear Miembro</h2>
+          <p class="text-gray-600 text-sm">Complete los campos requeridos para crear un nuevo miembro.</p>
+
+          @if (image) {
+            <img
+              [src]="image"
+              class="absolute bottom-0 right-0 h-[100px] rounded-xl"
+            >
+          }
+        </section>
+      <fieldset class="mt-4 flex flex-col justify-center items-center w-full gap-4 my-4">
+          
+          <section class="w-full flex flex-col lg:grid lg:grid-cols-12  gap-4 items-stretch justify-stretch justify-items-stretch">
+             
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-4 md:col-span-6 ">
+                  <section class="min-h-[20px] pb-2 ml-4">
+                      <p class="font-bold">Identidad</p>
+                    </section>
+                  <section [ngClass]="{ 'ng-error-input': isNotValidIdentity }"  class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                      <section [innerHTML]="
+                          {
+                            svg: 'identidad',
+                            text: '',
+                            class: isNotValidIdentity ? 'RED_STRONG' : 'PRIMARY_COLOR',
+                            ruta: 'svg' 
+                          }
+                          | svgIcon
+                          | async
+                      "></section>
+
+                      <p-inputMask
+                          mask="9999999999999"
+                          placeholder="Ej: 1201000010000"
+                          styleClass="w-full"
+                          inputId="identidad"
+                          autocomplete="off"
+                          [autoClear]="false"
+                          slotChar=""
+                          formControlName="identity"
+                          class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" type="text"
+                          name="Identidad" id="Identidad"
+                          (keyup)="onSearchUserByDni()"
+                        /> 
+
+ 
+                  </section>
+                  @if(isNotValidIdentity){
+                      <small class="text-red-500 animate__animated animate__fadeIn mt-1"
+                        >*Se debe especificar una identidad valida.
+                      </small>
+                  }
+              </section>
+  
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-4 md:col-span-6 ">
+                  <section class="min-h-[20px] pb-2 ml-4">
+                      <p class="font-bold">Nombres</p>
+                    </section>
+                  <section   [ngClass]="{ 'ng-error-input': isNotValidName }"  class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                      <section [innerHTML]="
+                          {
+                            svg: 'person',
+                            text: '',
+                            class: isNotValidName ? 'RED_STRONG' : 'PRIMARY_COLOR',
+                            ruta: 'svg'
+                          }
+                          | svgIcon
+                          | async
+                      "></section>
+                      <input  pInputText formControlName="names" placeholder="Ej: Jesus Samuel" autocomplete="off" class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" type="text" name="nombres" id="nombres">
+                  </section>
+                  @if(isNotValidName){
+                      <small class="text-red-500 animate__animated animate__fadeIn mt-1"
+                        >*Se debe especificar el Nombre.
+                      </small>
+                  }
+              </section>
+  
+  
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-4 md:col-span-6 ">
+                  <section class="min-h-[20px] pb-2 ml-4">
+                      <p class="font-bold">Apellidos</p>
+                    </section>
+                  <section [ngClass]="{ 'ng-error-input': isNotValidSurnames }" class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                      <section [innerHTML]="
+                          {
+                            svg: 'person',
+                            text: '',
+                            class: isNotValidSurnames ? 'RED_STRONG' : 'PRIMARY_COLOR',
+                            ruta: 'svg'
+                          }
+                          | svgIcon
+                          | async
+                      "></section>
+                      <input pInputText formControlName="surname" placeholder="Ej: Jesus Samuel" autocomplete="off" class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" type="text" name="apellidos" id="apellidos">
+                  </section>
+                  @if(isNotValidSurnames){
+                      <small class="text-red-500 animate__animated animate__fadeIn mt-1"
+                        >*Se debe especificar el Apellido.
+                      </small>
+                  }
+  
+              </section>
+  
+              <!-- FECHA NACIMIENTO -->
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6 ">
+                  <section class="min-h-[20px] pb-2 ml-4">
+                      <p class="font-bold">Fecha de Nacimiento</p>
+                  </section>
+                  <section  [ngClass]="{ 'ng-error-input': isRequiredDate }" class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                      <section [innerHTML]="{ svg: 'calendar', text: '',  class: isRequiredDate ? 'RED_STRONG' : 'PRIMARY_COLOR', ruta: 'svg' } | svgIcon | async"></section> 
+                      <p-datepicker  placeholder="20/10/2024" [appendTo]="'body'" formControlName="birth_date" class="MainInput w-full placeholder:text-GRAY_2 placeholder:font-medium placeholder:text-[15px] dk:placeholder:text-[18px] text-[18px]" />
+                  </section>
+                  @if(isRequiredDate){
+                      <small class="text-red-500 animate__animated animate__fadeIn mt-1"
+                        >*Se debe especificar la fecha de nacimiento.
+                      </small>
+                  }
+              </section>
+  
+              <!-- GENEROS -->
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6 ">
+                  <app-gender-dropdown-form-field
+                      label="Genero"
+                      placeholder="Seleccione el genero"
+                      inputId="sexo"
+                      [control]="getControl('gender')"
+                  />
+              </section>
+  
+              <!-- ESTADO CIVIL -->
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6 ">
+                  <app-civil-status-dropdown-form-field
+                      label="Estado civil"
+                      placeholder="Seleccione el estado civil"
+                      inputId="estado_civil"
+                      [control]="getControl('marital_status')"
+                  />
+              </section>
+  
+  
+              <!-- EMAIL -->
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6 ">
+                  <section class="min-h-[20px] pb-2 ml-4">
+                      <p class="font-bold">Correo electrónico</p>
+                  </section>
+                  <section [ngClass]="{ 'ng-error-input': isNotValidEmailFormat }" class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                      <section [innerHTML]="{ svg: 'email', text: '',  class: isNotValidEmailFormat ? 'RED_STRONG' : 'PRIMARY_COLOR', ruta: 'svg' } | svgIcon | async"></section> 
+                      <input pInputText formControlName="email" placeholder="Ej: micorreo@gmail.com" autocomplete="off" class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" type="text" name="email" id="email">
+                  </section>
+                  @if(isNotValidEmailFormat){
+                      <small class="text-red-500 animate__animated animate__fadeIn mt-1"
+                        >* Formato de correo electrónico no válido.
+                      </small>
+                  }
+              </section>
+  
+  
+              <!-- RED A LA QUE PERTENECE -->
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6  ">
+                  <app-networks-dropdown-form-field
+                      label="Red a la que pertenece"
+                      placeholder="Seleccione una Red"
+                      inputId="network_id"
+                      [control]="getControl('network_id')"
+                  />
+              </section>
+  
+              <!-- Grupo -->
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6  ">
+                <app-groups-dropdown-form-field
+                  
+                  [networkId]="selectedNetworkId"
+                  [control]="getControl('group_id')"
+                  label="Casa de reino"
+                  placeholder="Seleccione una Casa de reino"
+                  inputId="group_id"
+                />
+              </section>
+  
+              <!-- EMAIL -->
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6 ">
+                <section class="min-h-[20px] pb-2 ml-4">
+                    <p class="font-bold">Teléfono </p>
+                </section>
+                <section [ngClass]="{ 'ng-error-input': isNotValidPhoneFormat }" class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                    <section [innerHTML]="{ svg: 'phone', text: '',  class: isNotValidPhoneFormat ? 'RED_STRONG' : 'PRIMARY_COLOR', ruta: 'svg' } | svgIcon | async"></section> 
+                    <input pInputText formControlName="phone" placeholder="Ej: 33654520" autocomplete="off" class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" type="text" name="email" id="email">
+                </section>
+                @if(isNotValidPhoneFormat){
+                    <small class="text-red-500 animate__animated animate__fadeIn mt-1"
+                      >* Se debe especificar un Telefono.
+                    </small>
+                }
+              </section>
+
+              <!-- RED A LA QUE PERTENECE -->
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6  ">
+                <app-person-type-dropdown-form-field
+                    label="Tipo de persona"
+                    placeholder="Seleccione"
+                    inputId="person_type"
+                    [control]="getControl('person_type')"
+                />
+              </section>
+
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6 ">
+                    <section class="min-h-[20px] pb-2 ml-4">
+                        <p class="font-bold">Fecha de conversi&oacute;n</p>
+                    </section>
+                    <section  [ngClass]="{ 'ng-error-input': isRequiredDateConversion }" class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+                        <section [innerHTML]="{ svg: 'calendar', text: '',  class: isRequiredDateConversion ? 'RED_STRONG' : 'PRIMARY_COLOR', ruta: 'svg' } | svgIcon | async"></section> 
+                        <p-datepicker  placeholder="20/10/2024" [appendTo]="'body'" formControlName="date_conversion" class="MainInput w-full placeholder:text-GRAY_2 placeholder:font-medium placeholder:text-[15px] dk:placeholder:text-[18px] text-[18px]" />
+                    </section>
+                    @if(isRequiredDateConversion){
+                        <small class="text-red-500 animate__animated animate__fadeIn mt-1"
+                        >* Ingrese una fecha de conversi&oacute;n.
+                        </small>
+                    }
+             </section>
+
+             <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6 ">
+                <section class="min-h-[20px] pb-2 ml-4">
+                    <p class="font-bold">Tipo de conversión</p>
+                  </section>
+                  
+                  <p-dropdown
+                    styleClass="w-full py-3 px-5 "
+                    placeholder="Tipo de conversión"
+                    appendTo="body"
+                    inputId="conversion"
+                    id="conversion"
+                    [ngClass]="{ 'ng-error ng-dirty': isRequiredConvertion }"
+                    [options]="typeConversion"
+                    optionLabel="name"
+                    optionValue="value"
+                    [filter]="true"
+                    formControlName="conversion_type"
+                  ></p-dropdown>
+                  @if (isRequiredConvertion) {
+                  <small class="text-red-500 animate__animated animate__fadeIn"
+                    >* Tipo de conversión es obligatorio.</small
+                  >
+                  }
+            </section>
+
+            <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6 ">
+                <app-meetings-type-dropdown-form-field
+                label="Tipo Reunión"
+                placeholder="Seleccioner"
+                inputId="type_networks"
+                [control]="getControl('network_type')"
+              />
+            </section>
+
+            <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6">
+                <section class="min-h-[20px] pb-2 ml-4">
+                    <p class="font-bold">Invitado por:</p>
+                </section>
+                <section    class="flex flex-row w-full justify-center items-center border-[#DEDEDE] border-[2px] rounded-full py-2 px-5 gap-4 bg-MAIN_WHITE data-[disabled]:opacity-50">
+        
+        
+
+                    <p-autoComplete
+                        formControlName="invited_by"
+                        [suggestions]="filteredPeople"
+                        (completeMethod)="filterPeople($event)"
+                        [optionLabel]="getFullName"
+                        optionValue="id"
+                        [forceSelection]="true"
+                        [minLength]="3"
+                        [virtualScroll]="true"
+                        [itemSize]="30"
+                        [showClear]="true"
+                        appendTo="body"
+                        class="w-full placeholder:text-GRAY_2 placeholder:text-[17px] text-[18px]" 
+                        styleClass="w-full" 
+                        placeholder="Buscar persona">
+
+                        <ng-template let-person pTemplate="item">
+                            <div class="flex flex-col">
+                            <span class="font-semibold">{{ person.names }} {{ person.surname }}</span>
+                            <small class="text-gray-500">{{ person.identity }} / {{ person.phone }}</small>
+                            </div>
+                        </ng-template>
+
+                    </p-autoComplete>
+
+
+        </section>  
+    </section>
+
+
+            <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-12 md:col-span-6 ">
+                <p-editor
+                        formControlName="prayer_request"
+                        [style]="{ height: '100px' }"
+                        placeholder="Peticion de oración"
+                        ><ng-template pTemplate="header">
+                            <span class="ql-formats">
+                              <button type="button" class="ql-bold" aria-label="Bold"></button>
+                              <button
+                                type="button"
+                                class="ql-italic"
+                                aria-label="Italic"
+                              ></button>
+                              <button
+                                type="button"
+                                class="ql-underline"
+                                aria-label="Underline"
+                              ></button>
+                              <button
+                                type="button"
+                                class="ql-strike"
+                                aria-label="strike"
+                              ></button>
+                              <button
+                                type="button"
+                                class="ql-blockquote"
+                                aria-label="blockquote"
+                              ></button>
+                            </span>
+                            <span class="ql-formats">
+                              <button
+                                class="ql-list"
+                                value="ordered"
+                                ngbPopover="Ordered list"
+                                triggers="mouseenter:mouseleave"
+                              ></button>
+                              <button
+                                class="ql-list"
+                                value="bullet"
+                                ngbPopover="Bulleted list"
+                                triggers="mouseenter:mouseleave"
+                              ></button>
+                            </span> </ng-template
+                        
+                ></p-editor>
+            </section>
+  
+  
+              <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-12 md:col-span-6 ">
+                  <p-editor
+                  formControlName="address"
+                  [style]="{ height: '192px' }"
+                  placeholder="Dirección completa"
+                  
+                  ><ng-template pTemplate="header">
+                    <span class="ql-formats">
+                      <button type="button" class="ql-bold" aria-label="Bold"></button>
+                      <button
+                        type="button"
+                        class="ql-italic"
+                        aria-label="Italic"
+                      ></button>
+                      <button
+                        type="button"
+                        class="ql-underline"
+                        aria-label="Underline"
+                      ></button>
+                      <button
+                        type="button"
+                        class="ql-strike"
+                        aria-label="strike"
+                      ></button>
+                      <button
+                        type="button"
+                        class="ql-blockquote"
+                        aria-label="blockquote"
+                      ></button>
+                    </span>
+                    <span class="ql-formats">
+                      <button
+                        class="ql-list"
+                        value="ordered"
+                        ngbPopover="Ordered list"
+                        triggers="mouseenter:mouseleave"
+                      ></button>
+                      <button
+                        class="ql-list"
+                        value="bullet"
+                        ngbPopover="Bulleted list"
+                        triggers="mouseenter:mouseleave"
+                      ></button>
+                    </span> </ng-template
+                ></p-editor>
+              </section>
+  
+  
+  
+               
+          </section>
+  
+  
+  
+          <section class="w-full flex flex-col lg:grid lg:grid-cols-6  gap-4 items-stretch justify-stretch justify-items-stretch">
+            
+            <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3">
+            </section>
+            <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 items-end">
+              <button
+               
+                type="submit" 
+                [disabled]="createMemberForm.invalid"
+                class="cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full max-w-[320px] bg-SECONDARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+              >
+                Guardar 
+              </button>
+            </section>
+          </section>
+  
+  
+          
+  
+  
+      </fieldset>
+  </form>
+</p-card>

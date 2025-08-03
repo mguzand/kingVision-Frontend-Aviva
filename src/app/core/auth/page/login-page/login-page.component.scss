@@ -1,0 +1,34 @@
+main section:first-of-type div img {
+    width: 256px;
+    padding: 15px;
+}
+
+main section:first-of-type {
+    padding: 1rem;
+}
+ 
+main section:first-of-type div {
+    border-radius: 1rem;
+    background-color: var(--primary-color);
+    display: grid;
+    place-items: initial;
+    height: 100%;
+    background-image: url(../../../../../../public/images/pastor_cesar.jpg);
+    background-color: #ff777780;
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-position: center;
+}
+
+main {
+    --primary-color: #02c4dd;
+    --primary-color-dark: #02b0c7;
+    --primary-color: var(--primary-500);
+    --primary-color-dark: var(--primary-600);
+    background-color: #fff;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+ 

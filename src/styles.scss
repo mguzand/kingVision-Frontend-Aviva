@@ -1,0 +1,297 @@
+@use "primeicons/primeicons.css";
+@use "./assets/layout/layout.scss";
+@use "tailwindcss";
+@use "../node_modules/ngx-spinner/animations/square-jelly-box.css";
+@use "../node_modules/leaflet/dist/leaflet.css";
+@use "../node_modules/leaflet.fullscreen/Control.FullScreen.css";
+
+ 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@plugin "tailwindcss-primeui";
+@layer tailwind, primeng;
+
+
+.p-toggleswitch {
+    position: relative;
+}
+
+@font-face {
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-Thin.ttf"), format("truetype");
+    font-weight: 100;
+  }
+  @font-face {
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-ExtraLight.ttf"), format("truetype");
+    font-weight: 200;
+  }
+  @font-face {
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-Light.ttf"), format("truetype");
+    font-weight: 300;
+  }
+  @font-face {
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-Regular.ttf"), format("truetype");
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-Medium.ttf"), format("truetype");
+    font-weight: 500;
+  }
+  @font-face {
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-SemiBold.ttf"), format("truetype");
+    font-weight: 600;
+  }
+  @font-face {
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-Bold.ttf"), format("truetype");
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-ExtraBold.ttf"), format("truetype");
+    font-weight: 800;
+  }
+  @font-face {
+    font-family: "Outfit";
+    src: url("./assets/fonts/Outfit-Black.ttf"), format("truetype");
+    font-weight: 900;
+  }
+  
+  @font-face {
+    font-family: "OutfitWoff";
+    src: url("./assets/fonts/Outfit-Regular.woff");
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: "OutfitWoff";
+    src: url("./assets/fonts/Outfit-Medium.woff");
+    font-weight: 500;
+  }
+
+  :root {
+    --PRIMARY_COLOR: #245387;
+    --SECONDARY_COLOR: #245387;
+    --DARK_BLUE: #1a2d41;
+    --MAIN_WHITE: #ffffff;
+    --GRAY_1: #333333;
+    --GRAY_2: #4f4f4f;
+    --GRAY_3: #828282;
+    --GRAY_FIFTH: #bfbfbf1a;
+    --RED_STRONG: #ef2b51;
+    --primary-color: #245387;
+  }
+
+  .bg-RED_STRONG {
+    background-color: var(--RED_STRONG);
+}
+
+  .text-SECONDARY {
+    color: var(--SECONDARY_COLOR);
+  }
+  
+  .bg-DARK_BLUE {
+    background-color: var(--DARK_BLUE);
+  }
+  
+  .text-GRAY_2 {
+    color: var(--GRAY_2);
+  }
+  
+  .text-DARK_BLUE {
+    color: var(--DARK_BLUE);
+  }
+  
+  .p-component-overlay-enter {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+  }
+  
+  .p-component-overlay {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+  }
+
+  .MainInput {
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 50px var(--MAIN_WHITE) inset;
+      -webkit-text-inset: var(--SECONDARY_COLOR);
+      transition: background-color 5000s ease-in-out 0s;
+      font-family: "Outfit";
+    }
+    outline: none;
+  }
+
+  
+*:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  .p-focus {
+    box-shadow: none !important;
+  }
+
+
+  body {
+     
+    //font-family: "Outfit", Montserrat, sans-serif;
+     font-size: 14px;
+    font-smooth: always;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--SECONDARY_COLOR);
+  }
+
+
+
+  .p-inputtext {
+    width: 100% !important;
+  }
+  
+  .p-autocomplete {
+    width: 100%;
+  }
+
+  .ng-error-input{
+    border-color: #e32424;
+  }
+
+  .p-inputtext {
+    font-family: var(--font-family);
+    font-feature-settings: var(--font-feature-settings, normal);
+    font-size: 1rem;
+    color: #4b5563;
+    background: #fff;
+    padding: 0.75rem;
+    border: 0px solid #d1d5db;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+      box-shadow 0.2s;
+    appearance: none;
+    border-radius: 6px;
+  }
+
+  .p-datepicker {
+    width: 100%;
+}
+  
+.p-dropdown {
+  border-color: #DEDEDE;
+  border-width: 2px;
+  border-radius: 9999px;
+}
+
+
+.p-select-overlay{
+  position: relative;
+}
+  
+.p-select-option {
+  margin: 0;
+  padding: .75rem 1.25rem;
+  border: 0 none;
+  transition: box-shadow .2s;
+  border-radius: 0;
+}
+
+.p-select-option:not(.p-highlight):not(.p-disabled):hover {
+  color: #4b5563;
+  background: #f3f4f6;
+}
+
+.p-select-option.p-select-option-selected.p-focus {
+ background: #14b8a63d;
+}
+
+.p-menu-item-link {
+  padding: 11px;
+}
+
+.overflow-hidden {
+  overflow: visible;
+}
+
+.bg-SECONDARY_COLOR {
+  background-color: var(--SECONDARY_COLOR);
+}
+
+.disabled\:bg-GRAY_3:disabled {
+  background-color: var(--GRAY_3);
+}
+
+.bg-PRIMARY_COLOR {
+  background-color: var(--PRIMARY_COLOR);
+}
+
+h3 {
+  margin: 0rem;
+}
+
+.text-GRAY_3 {
+  color: var(--GRAY_3);
+}
+
+.menu-separator {
+  border-top: 1px solid var(--p-menu-separator-border-color);
+}
+
+.p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  --tw-backdrop-blur: blur(2px);
+  backdrop-filter: var(--tw-backdrop-blur);
+}
+
+
+
+.text-MAIN_WHITE {
+  color: var(--MAIN_WHITE);
+}
+
+.w-2 .pi {
+  font-size: 14px !important;
+}
+
+.w-2 button {
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+  padding: 16px;
+}
+
+.p-dialog-footer.p-dialog-footer {
+  display: flex;
+}
+
+.p-dialog-footer p-button{
+  width: 100% !important
+}
+
+
+app-welcome-party-pdf .p-dialog{
+  --max-height: 100% !important;
+}
+
+.section-none { 
+  width: 100%;
+  padding: 3.5rem 2rem;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: .75rem;
+  background-color: #f3f4f6;
+  border-radius: .5rem;
+}
+
+
+body > .p-dropdown-panel {
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
+.p-image-preview {
+    position: relative;
+    display: block !important;
+    line-height: 0;
+}

@@ -1,0 +1,94 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  ><p style="color: white">Cargando...</p></ngx-spinner
+>
+
+<p-confirmDialog key="confirmDeleteDialog" [style]="{width: '350px'}"></p-confirmDialog>
+ 
+
+@if (responseStudent) {
+
+<div class="mt-10 max-w-3xl mx-auto p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-md">
+  
+    
+    <section class="relative flex flex-col w-full items-center justify-center">
+          <h2 class="text-2xl font-bold text-SECONDARY_COLOR mb-0 pb-0" style="margin-bottom: 0px;">{{ classes.scoolClasses.name }}.</h2>
+          <p class="text-gray-600 text-sm pb-5">Asistencia a clases.</p>
+    </section>
+
+
+    <section>
+      <p-dropdown
+        styleClass="w-full py-3 px-5 mb-5"
+        placeholder="Seleccionar clase diferente"
+        appendTo="body"
+        inputId="conversion"
+        id="conversion" 
+        [options]="this.responseStudent.classes"
+        optionLabel="scoolClasses.name"
+        optionValue="scool_class_id"
+        [filter]="true"
+         (onChange)="modifClass($event)" 
+        [(ngModel)]="selection"
+    ></p-dropdown>
+    </section>
+
+
+  <div class="space-y-3">
+    <div
+      *ngFor="let alumno of this.responseStudent.student"
+      class="flex items-center justify-between p-3 rounded-2xl shadow-xs transition-transform duration-300 cursor-pointer"
+      [ngClass]="{
+        'bg-green-50': alumno.asistencia,
+        'bg-white': !alumno.asistencia
+      }"
+    >
+      <div class="flex items-center gap-4">
+         @if (!alumno.person.identity) {
+           <div
+             class="h-14 w-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-inner"
+             [ngStyle]="{ 'background-color': alumno.color }"
+           >
+             {{ getInicial(alumno.person.names) }}
+           </div>
+         }@else{
+          @if (!avatarLoadError[alumno.person.identity]) {
+            <p-avatar class="min-w-[46px]" [image]="`${url_server}/person/files/${alumno.person.identity}`" (onImageError)="avatarLoadError[alumno.person.identity] = true"  shape="circle" size="large" />
+          }@else {
+            <div
+             class="h-14 w-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-inner"
+             [ngStyle]="{ 'background-color': alumno.color }"
+           >
+             {{ getInicial(alumno.person.names) }}
+           </div>
+          }
+         }
+        <span class="text-lg md:text-xl text-gray-800 font-semibold">
+          {{ alumno.person.names | uppercase }} {{ alumno.person.surname | uppercase  }}
+        </span>
+      </div>
+
+      <p-inputSwitch
+        [(ngModel)]="alumno.asistencia"
+        [style]="{ width: '80px', height: '40px' }"
+      ></p-inputSwitch>
+    </div>
+  </div>
+
+<div class="flex flex-row-reverse w-full">
+    <div class="ml-7 w-full"><button
+        type="submit"
+         (click)="saveOfAssistence()"
+          
+        class="min-w-[220px] cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full bg-PRIMARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+      >
+        Guardar Asistencia
+      </button></div>
+ 
+  </div>
+</div>
+}

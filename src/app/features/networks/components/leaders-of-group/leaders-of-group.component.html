@@ -1,0 +1,84 @@
+<p-table
+    #dt
+    [value]="data"
+    [globalFilterFields]="['identity', 'names', 'surname']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedAffirmation"
+    [rowHover]="true"
+    dataKey="id"
+    
+    styleClass="p-datatable-sm" styleClass="p-datatable-gridlines border-round overflow-hidden" showGridlines
+
+
+>
+
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Personas registradas como lideres de la red {{ data.length > 0 ? data[0].groups.networks.name : '' }}</h5>
+            
+        </div>
+    </ng-template>
+
+    <ng-template #header>
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox />
+            </th> 
+            <th>Identidad</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Edad</th>
+            <th>Celular</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataleaders>
+        <tr>
+            <td style="width: 3rem">
+                <p-tableCheckbox [value]="dataleaders" />
+            </td>
+            <td>{{ dataleaders.identity }}</td>
+            <td>{{ dataleaders.names }}</td>
+            <td>{{ dataleaders.surname }}</td>
+            <td class="text-center">{{ dataleaders.birth_date | age }}</td>
+            <td>{{ dataleaders.phone }}</td>
+        </tr>
+    </ng-template>
+
+    @if (data.length === 0 && !isLoading) {
+        <ng-template #footer>
+            <tr>
+                <td colspan="7">
+                    <section class="section-none mt-4">
+                        <div >No se encontraron lideres registrados en esta red</div>
+                    </section>
+                </td>
+            </tr>
+        </ng-template>
+    }
+
+
+</p-table>
+
+
+<div class="flex flex-row-reverse w-full">
+    <div class="ml-7"><button
+        type="submit"
+        [disabled]="selectedAffirmation.length === 0"
+        (click)="andList()"
+        class="min-w-[220px] cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full bg-PRIMARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+      >
+        Agregar
+      </button></div>
+
+    <div >
+        <button
+            type="button"
+            (click)="closeModal()"
+            class="min-w-[220px]  cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full bg-RED_STRONG h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+        >
+        Cancelar
+        </button>
+    </div>
+    
+  </div>

@@ -1,0 +1,44 @@
+<form class="w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- RED A LA QUE PERTENECE -->
+    <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6  ">
+        <app-networks-dropdown-form-field
+            label="Red a la que pertenece"
+            placeholder="Seleccione una Red"
+            inputId="network_id"
+            [control]="getControl('network_id')"
+        />
+    </section>
+
+    <!-- Grupo -->
+    <section class="flex w-full flex-col overflow-hidden rounded-2xl lg:col-span-3 md:col-span-6 mt-5  ">
+    <app-groups-dropdown-form-field
+        
+        [networkId]="selectedNetworkId"
+        [control]="getControl('group_id')"
+        label="Casa de reino"
+        placeholder="Seleccione una Casa de reino"
+        inputId="group_id"
+    />
+    </section>
+
+
+    <section class="mt-4 ml-2 flex flex-row flex-nowrap justify-between items-center">
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full bg-SECONDARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+        >
+          Cancelar
+        </button>
+    
+        <button
+          type="submit"
+          [disabled]="form.invalid"
+          class="cursor-pointer mt-3 m-1 disabled:bg-GRAY_3 w-full bg-PRIMARY_COLOR h-[55px] flex items-center justify-center text-[17px] text-white font-bold rounded-full"
+        >
+          Asignar
+        </button>
+    </section>
+
+</form>

@@ -1,0 +1,112 @@
+<p-table [value]="data.period"  styleClass="p-datatable-sm" styleClass="p-datatable-gridlines border-round overflow-hidden" showGridlines>
+    <ng-template pTemplate="caption">
+        <div class="flex justify-between">
+            <div class="min-w-[320px] field col-5 md:col-5">
+                <span class="p-input-icon-left w-full">
+                    <input
+                    pInputText
+                    appDebounce
+                    type="text"
+                    class="p-inputtext w-full"
+                    placeholder="Buscar..."
+                    
+                    (input)="onSearch()"
+                    />
+                </span>
+            </div>
+
+            <div class="flex">
+            <button
+                 (click)="howOpenStudentList()"
+                class="mr-5 cursor-pointer text-MAIN_WHITE text-[18px] font-semibold bg-PRIMARY_COLOR flex items-center flex-row rounded-lg justify-center gap-2"
+                style="padding: 10px"
+            >
+           <span class="text-white-300 !font-semibold">Nuevo registro</span>
+                <svg
+                width="20"
+                height="20"
+                viewBox="0 0 17 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-[20px] h-[20px]"
+                >
+                <path
+                    _ngcontent-ng-c3051437113=""
+                    d="M0.577969 11.27V7.28H16.433V11.27H0.577969ZM6.49297 0.945H10.553V17.57H6.49297V0.945Z"
+                    fill="currentColor"
+                ></path>
+                </svg>
+            </button>
+
+            <button 
+            (click)="howOpenPdf(6)"
+                class="mr-5 w-[200px] cursor-pointer text-MAIN_WHITE text-[18px] font-semibold bg-PRIMARY_COLOR flex items-center flex-row rounded-lg justify-center gap-2"
+                style="padding: 10px"
+                >
+                <span class="text-white-300 !font-semibold">Reporte para lideres</span> 
+            </button>
+
+            <button 
+            (click)="howOpenPdf(7)"
+                class="mr-5 w-[250px] cursor-pointer text-MAIN_WHITE text-[18px] font-semibold bg-PRIMARY_COLOR flex items-center flex-row rounded-lg justify-center gap-2"
+                style="padding: 10px"
+                >
+                <span class="text-white-300 !font-semibold">Reporte para general</span> 
+            </button>
+        </div>
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+          <th>No</th>
+          <th>Identidad</th>
+          <th>Nombre completo</th> 
+          <th>Edad</th>
+          <th>Celular</th>
+          <th>Opciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-student let-index="rowIndex" >
+            <tr>
+                <td>{{ ((pagination.currentPage - 1) * pagination.itemsPerPage) + index + 1 }}</td>
+                <td>{{ student.person.identity }}</td>
+                <td>
+                    <div class="flex items-center gap-2"  (click)="mostrarPreview(student.person.identity)" >
+                        <p-avatar *ngIf="!avatarLoadError[student.person.identity]" [image]="`${url_server}/person/files/${student.person.identity}`" (onImageError)="avatarLoadError[student.person.identity] = true"  shape="circle" size="large" />
+                        <span>{{ student.person?.names }} {{ student.person?.surname }}</span>
+                    </div>
+        
+                    <p-image
+                        #imgPreview
+                        [src]="`${url_server}/person/files/${student.person.identity}`"
+                        [alt]="student.person.names"
+                        [preview]="true"
+                        class="sr-onlys"
+                        width="0"
+                        [attr.data-identity]="student.person.identity">
+                    </p-image>
+               </td> 
+               <td class="text-center">{{ student.person.birth_date | age }}</td>
+               <td>{{ student.person.phone }}</td>
+               <td></td>
+            </tr>
+    </ng-template>
+</p-table>
+
+@if (data.period.length === 0) {
+    <section class="section-none mt-4">
+        <div >No se encontraron participante para este evento</div>
+    </section>
+}
+
+<div class="col-12">
+                <p-paginator
+                  [first]= "paginationParams.currentPage * (paginationParams.itemsPerPage || 10) - paginationParams.itemsPerPage"
+                  (onPageChange)="onPageChange($event)"
+                  [totalRecords]="pagination.totalItems"
+                  [rows]="paginationParams.itemsPerPage || 10"
+                  [rowsPerPageOptions]="[5, 10, 20, 30,100]"
+                ></p-paginator>
+              </div>
+            

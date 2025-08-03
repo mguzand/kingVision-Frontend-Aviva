@@ -1,0 +1,56 @@
+<div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Campaign Performance -->
+      <div class="col-span-2 bg-white rounded-xl p-6 shadow">
+        
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <p-card *ngFor="let item of trafficItems; let i = index" styleClass="shadow-none" class="cursor-pointer border rounded-xl border-[#e5e7eb] p-4" >
+            <ng-template pTemplate="content">
+              <div class="flex justify-between items-center ">
+                <div class="flex items-center gap-4">
+                  <i class="text-xl" [ngClass]="item.icon"></i>
+                  <div>
+                    <div class="text-base font-medium">{{ item.label }}</div> 
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <!-- <p-progressBar [value]="60" styleClass="w-20 h-2" [showValue]="false"></p-progressBar>
+                  <i class="pi pi-angle-right text-gray-500"></i> -->
+                  <div class="text-sm text-gray-500">{{ item.count }} </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-card>
+        </div>
+      </div>
+
+      <!-- Campaign Targets -->
+      <p-card class="bg-white rounded-xl p-6 shadow">
+        @if (stadistic) {
+          <app-charts [stadistic]="stadistic" type="pie" name="Total clientes" ></app-charts>
+        }
+        <!-- <ng-template pTemplate="header">
+          <h2 class="text-xl font-semibold">Campaign Targets</h2>
+        </ng-template>
+
+        <div class="text-4xl font-bold mb-1">{{ percentageAchieved }}%</div>
+        <div class="text-sm text-gray-500 mb-4">
+          {{ currentTotal }} / {{ targetTotal }}
+        </div>
+
+        <p-progressBar [value]="percentageAchieved" styleClass="h-3 mb-4" [showValue]="false"></p-progressBar>
+
+        <div class="space-y-4">
+          <div *ngFor="let detail of targetDetails" class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <span
+                class="w-3 h-3 rounded-full"
+                [ngStyle]="{ 'background-color': detail.color }"
+              ></span>
+              <span class="text-sm font-medium">{{ detail.label }}</span>
+            </div>
+            <span class="text-sm text-gray-600">{{ detail.value }} / {{ detail.goal }}</span>
+          </div>
+        </div> -->
+      </p-card>
+    </div>

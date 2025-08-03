@@ -1,0 +1,49 @@
+<div class="p-4">
+    <app-section-header
+    [titleheader]="title"
+    description="En esta sección, podrás visualizar toda la información relacionada con una casa de reino específica. Se mostrará el listado completo de los miembros que la conforman, junto con su estado y rol dentro de la estructura, como líder, supervisor, anciano, entre otros. Esta vista te permitirá identificar fácilmente la distribución de responsabilidades y jerarquías dentro de la casa de reino, así como hacer un seguimiento detallado de cada integrante. Además, contarás con herramientas para filtrar, buscar o clasificar a los miembros, lo que facilitará la gestión y el análisis organizacional."  
+    image="--"
+    ></app-section-header>
+</div>
+
+
+<section class="mx-auto max-w-(--breakpoint-2x2) p-4 ">
+    <section class="grid grid-cols-1 gap-12">
+         <section class="space-y-12 ">
+            <div class="w-full flex flex-col lg:grid lg:grid-cols-12 boder-div mb-5">
+                @if (leaders) {
+                    <div class="g:col-span-4 md:col-span-6">
+                        <div class="conversation-header mb-[19px]">
+                            <div class="chat-avatar"> 
+                                <i class="pi pi-user"></i>
+                            </div>
+                            <div class="conversation-info">
+                                <div class="conversation-name">{{ leaders }}</div>
+                                <div class="conversation-status">Lider de casa de reino</div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (host) {
+                    <div class="g:col-span-4 md:col-span-6">
+                        <div class="conversation-header mb-[19px]">
+                            <div class="chat-avatar"> 
+                                <i class="pi pi-user"></i>
+                            </div>
+                            <div class="conversation-info">
+                                <div class="conversation-name">{{ host.names }} {{ host.surname }}</div>
+                                <div class="conversation-status">Anfitrión de la casa de reino</div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+             <p-card styleClass="animate__animated animate__fadeIn">
+                @if (group) {
+                    <app-details-groups-table [data]="group"  />
+                }
+             </p-card>
+         </section>
+    </section>
+ </section>

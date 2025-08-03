@@ -1,0 +1,17 @@
+form, label {
+    width: 100%;
+    display: grid
+;
+    gap: 0.3rem;
+}
+
+
+
+
+.disabled\:bg-GRAY_3:disabled {
+    background-color: var(--GRAY_3);
+  }
+  
+  .bg-PRIMARY_COLOR {
+    background-color: var(--PRIMARY_COLOR);
+  }

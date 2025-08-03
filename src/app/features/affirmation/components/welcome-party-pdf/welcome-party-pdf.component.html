@@ -1,0 +1,17 @@
+ 
+
+
+@if (blob) {
+    <ngx-extended-pdf-viewer
+        [src]="blob"
+        [textLayer]="true" 
+        [showHandToolButton]="true" 
+        [showPresentationModeButton]="false"
+        [(page)]="page"
+        [(pageLabel)]="pageLabel"
+        [showDownloadButton]="true"
+        [(scrollMode)]="scrollMode"
+        [(zoom)]="zoom"
+    >
+    </ngx-extended-pdf-viewer>
+}
