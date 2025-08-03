@@ -88,7 +88,7 @@ export class DetailsGroupsTableComponent {
           this._toastService.show({
             severity: 'success',
             summary: 'Correcto',
-            detail: `Anfitrion de casa de reino establecido`,
+            detail: `Anfitrion de casa de Avivamiento establecido`,
           });
         },
         error: (err: HttpErrorResponse) => {

@@ -30,7 +30,7 @@ export class DashboardComponent {
     { label: 'Nuevo Creyente', count: 0, icon: 'pi pi-users' },
     { label: 'Empresarios', count: 0, icon: 'pi pi-users' },
     { label: 'Redes', count: 6, icon: 'pi pi-users' },
-    { label: 'Casas de reino', count: 26, icon: 'pi pi-users' },
+    { label: 'Casas de Avivamiento', count: 26, icon: 'pi pi-users' },
   ];
 
   targetDetails = [

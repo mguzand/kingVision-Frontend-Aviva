@@ -24,7 +24,7 @@ export class DetailGroupPageComponent {
   public leaders: string = '';
   public host: Person;
   public group: Groups;
-  public title = 'Detalle de casa de reino';
+  public title = 'Detalle de casa de Avivamiento';
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _loadingService: LoadingService,
@@ -59,7 +59,7 @@ export class DetailGroupPageComponent {
 
                this.group = Group;
                if(Group){
-                 this.title = `Detalle de casa de reino ${Group.name}`;  //{{ group ? group[0].name : '' }}
+                 this.title = `Detalle de casa de Avivamiento ${Group.name}`;  //{{ group ? group[0].name : '' }}
                  this.host = Group.person.find((e)=> e.is_host === true);
                }
                

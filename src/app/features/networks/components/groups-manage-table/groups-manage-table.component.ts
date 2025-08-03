@@ -87,7 +87,7 @@ export class GroupsManageTableComponent {
   onRemoveChip(people_id: string, group_id: string) {
     this._confirmationService.confirm({
       key: 'confirmDeleteDialog',
-      message: '¿Seguro que deseas eliminar lider de casa de reino?',
+      message: '¿Seguro que deseas eliminar lider de casa de Avivamiento?',
       header: 'Confirmar acción',
       acceptIcon: 'none',
       rejectIcon: 'none',
@@ -106,7 +106,7 @@ export class GroupsManageTableComponent {
               this._toastService.show({
                 severity: 'success',
                 summary: 'Lider removido',
-                detail: `El lider fue eliminado de la casa de reino`,
+                detail: `El lider fue eliminado de la casa de Avivamiento`,
               });
 
               this.getGroupPaginations();
@@ -139,7 +139,7 @@ export class GroupsManageTableComponent {
         overflow: 'auto',
       },
       styleClass: 'col458',
-      header: `Agregar lider a casa de reino ${ data.name }`,
+      header: `Agregar lider a casa de Avivamiento ${ data.name }`,
       baseZIndex: 10,
       data,
       focusOnShow: false,
@@ -167,7 +167,7 @@ export class GroupsManageTableComponent {
           overflow: 'auto',
         },
         styleClass: 'col458',
-        header: 'Editar casa de reino',
+        header: 'Editar casa de Avivamiento',
         baseZIndex: 10,
         data,
         focusOnShow: false,
@@ -191,16 +191,16 @@ export class GroupsManageTableComponent {
           command: () => this.editRegister(groups),
         },
         {
-          label: 'Agregar lider de casa de reino',
+          label: 'Agregar lider de casa de Avivamiento',
           icon: 'pi pi-user-plus',
           command: () => this.dialogLeadersRefRegister(groups),
         },
         {
-          label: groups.status ?  'Dar de baja casa de reino' : 'Activar casa de reino',
+          label: groups.status ?  'Dar de baja casa de Avivamiento' : 'Activar casa de Avivamiento',
           icon: groups.status ? 'pi pi-times' : 'pi pi-check' ,
           command: () => this.onDeleteActivity(groups.id),
         },{
-          label: 'Detalle de casa de reino',
+          label: 'Detalle de casa de Avivamiento',
           icon: 'pi pi-external-link' ,
           command: () => this._router.navigate(['/network/groups/details', groups.id]),
         },
@@ -231,7 +231,7 @@ export class GroupsManageTableComponent {
         overflow: 'auto',
       },
       styleClass: 'col458',
-      header: 'Agregar casa de reino',
+      header: 'Agregar casa de Avivamiento',
       baseZIndex: 10,
       data: { network_id: this.network_id }
     });
@@ -247,7 +247,7 @@ export class GroupsManageTableComponent {
   onDeleteActivity(id: string) {
     this._confirmationService.confirm({
       key: 'confirmDeleteDialog',
-      message: '¿Seguro que deseas modificar el estado de esta casa de reino?',
+      message: '¿Seguro que deseas modificar el estado de esta casa de Avivamiento?',
       header: 'Confirmar acción',
       acceptIcon: 'none',
       rejectIcon: 'none',
@@ -266,7 +266,7 @@ export class GroupsManageTableComponent {
               this._toastService.show({
                 severity: 'success',
                 summary: 'Estado Modificado',
-                detail: `El estado de la casa de reino modificado`,
+                detail: `El estado de la casa de Avivamiento modificado`,
               });
 
               const group = this.data.groups.find(g => g.id === id)

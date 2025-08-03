@@ -151,7 +151,7 @@ export class ProfessionManageTableComponent {
     async AddAssignment(id_person: string){
       this.refAssignment = this._dialogService.open(AssignmentComponent, {
           width: '400px',
-          header: `Asignar casa de reino`,
+          header: `Asignar casa de Avivamiento`,
           data: { id_person},
           focusOnShow: false,
           closable: true, 
@@ -197,7 +197,7 @@ export class ProfessionManageTableComponent {
     for (let data of this.data.proffesion)
       this.menuItems[data.people_id] = [
         {
-          label: 'Asignar casa de reino',
+          label: 'Asignar casa de Avivamiento',
           icon: 'pi pi-pencil',
           disabled: data.person.group_id ? true : false,
           command: () => this.AddAssignment(data.people_id),

@@ -107,11 +107,11 @@ export class NetworksManageTableComponent {
     for (let network of this.data.networks)
       this.menuItems[network.id] = [
         {
-          label: 'Casas de reino',
+          label: 'Casas de Avivamiento',
           //command: () => this.OnGetHomes(periods),
         },
         {
-          label: 'Agregar casa de reino',
+          label: 'Agregar casa de Avivamiento',
           //command: () => this.OnAddtHomes(periods),
         },
       ];
